@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "name": "Download'em All",
+    "description": "Download'em All",
+    "version": "1.0",
+    "homepage_url": "https://github.com/micklinISgood",
+    "browser_action": {
+        "default_icon": "download'em all.png",
+        "default_popup": "popup.html",
+        "default_title": "Detected files"
+    },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "all_frames": true,
+        "js":      ["scripts/content.js"]
+    }],
+    "permissions": [
+        "activeTab"
+    ],
+    "content_security_policy": "script-src 'self' https://github.com/micklinISgood; object-src 'self'"
+}
+
