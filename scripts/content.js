@@ -1,6 +1,5 @@
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
-    console.log("something happening from the extension");
-
+    
 	var extensions = [".aiff",".aif",".au",".avi",".bat",".bmp",".java",".class",".csv",".cvs",".dbf",".dif",".doc",".docx",".eps",".exe",".fm3",".gif",".hqx",".htm",".html",".jpg",".jpeg",".mac",".map",".mdb",".mid",".midi",".mov",".qt",".mtb",".mtw",".pdf",".png",".ppt",".psd",".pptx",".psp",".qxd",".ra",".rtf",".sit",".tar",".tif",".txt",".wav",".wk3",".wks",".wpd",".wp5",".xls",".xlsx",".zip"];
 	var dict = new Object();
 	var linksList = document.querySelectorAll('a');
@@ -21,7 +20,7 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
         		
     		}
     	
-    }
+        }
 
 	});
 	

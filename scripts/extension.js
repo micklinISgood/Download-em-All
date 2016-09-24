@@ -1,25 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('status').textContent = "Extension loaded";
-    var button = document.getElementById('changelinks');
+    //document.getElementById('status').textContent = "Extension loaded";
+    
+    $('#switch-labelText').bootstrapSwitch();
+    $('#switch-labelText').bootstrapSwitch("state", true);
+    $('#switch-labelText').bootstrapSwitch("size", 'mini');
+    $('#switch-labelText').bootstrapSwitch("onText", 'o');
+    $('#switch-labelText').bootstrapSwitch("offText", 'x');
+
+    var button = document.getElementById('download');
+    var keys = [];
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {data: null}, function(response) {
-                document.getElementById('status').textContent = response;
+                var data = response.data;
+                Object.keys(data).forEach(function(key) {
+                        keys.push(key);
+                });
+                $('#switch-labelText').bootstrapSwitch("labelText", keys[0]+"("+data[keys[0]].length+")");
+                //document.getElementById('switch-labelText').text = keys[0];
                 //console.log('success');
             });
     });
     button.addEventListener('click', function () {
-        $('#status').html('Clicked change links button');
-        var text = $('#linkstext').val();
-        if (!text) {
-            $('#status').html('Invalid text provided');
-            return;
-        }
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {data: text}, function(response) {
-                $('#status').html(response);
-                //console.log('success');
-            });
-        });
+        // $('#status').html('Clicked change links button');
+        // var text = $('#linkstext').val();
+        // if (!text) {
+        //     $('#status').html('Invalid text provided');
+        //     return;
+        // }
+        // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        //     chrome.tabs.sendMessage(tabs[0].id, {data: text}, function(response) {
+        //         $('#status').html(response);
+        //         //console.log('success');
+        //     });
+        // });
     });
 });
 
