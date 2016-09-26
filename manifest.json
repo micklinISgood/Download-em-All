@@ -14,9 +14,12 @@
         "all_frames": true,
         "js":      ["scripts/content.js"]
     }],
+    "icons": { "16": "download'em all.png",
+           "48": "download'em all.png",
+          "128": "download'em all.png" },
     "permissions": [
         "activeTab"
     ],
-    "content_security_policy": "script-src 'self' https://github.com/micklinISgood; object-src 'self'"
-}
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+  }
 
