@@ -1,11 +1,11 @@
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     
 	var extensions = [".aiff",".aif",".au",".avi",".bat",".bmp",".java",".class",".csv",".cvs",".dbf",".dif",".doc",".docx",".eps",".exe",".fm3",".gif",".hqx",".htm",".html",".jpg",".jpeg",".mac",".map",".mdb",".mid",".midi",".mov",".qt",".mtb",".mtw",".pdf",".png",".ppt",".psd",".pptx",".psp",".qxd",".ra",".rtf",".sit",".tar",".tif",".txt",".wav",".wk3",".wks",".wpd",".wp5",".xls",".xlsx",".zip"];
-	var imgs = [".jpg",".png"];
+	var imgs = [".jpg",".png",".jpeg"];
     var vids = [".mp4",".flv"];
     var dict = new Object();
-	var linksList = document.querySelectorAll('a');
-	[].forEach.call(linksList, function(anchors) {
+	var List = document.querySelectorAll('a');
+	[].forEach.call(List, function(anchors) {
 
 
         var url = anchors.href;
@@ -25,8 +25,8 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
         }
 
 	});
-    vList = document.querySelectorAll('video');
-    [].forEach.call(vList, function(anchors) {
+    List = document.querySelectorAll('video');
+    [].forEach.call(List, function(anchors) {
 
 
         var url = anchors.src;
@@ -46,9 +46,9 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
         }
 
     });
-    pList = document.querySelectorAll('img');
+    List = document.querySelectorAll('img');
     //console.log(linksList);
-    [].forEach.call(pList, function(anchors) {
+    [].forEach.call(List, function(anchors) {
 
 
         var url = anchors.src;
@@ -66,6 +66,8 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
             }
         
         }
+
+        
 
     });
 	
