@@ -25,7 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
             window.URL.revokeObjectURL(url);
         };
     }());
-
+    $('#report-bug').click(function(){
+        chrome.tabs.create({
+            "url": "https://www.facebook.com/profile.php?id=1229830845",
+            "active": true
+        });
+    });
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {data: null}, function(response) {
                 rdata = response.data;

@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Download'em All",
     "description": "Download'em All",
-    "version": "1.0",
+    "version": "1.1",
     "homepage_url": "https://github.com/micklinISgood",
     "browser_action": {
         "default_icon": "download'em all.png",
