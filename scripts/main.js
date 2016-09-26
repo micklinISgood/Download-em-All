@@ -29,9 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {data: null}, function(response) {
                 rdata = response.data;
+                var count = 0;
                 Object.keys(rdata).forEach(function(key) {
                         selector[key] = true;
                         keys.push(key);
+                        count++;
                 });
                 folder = tabs[0].url + "_";
                 if(keys.length !=0){button.disabled = false;} 
@@ -54,6 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     $("#"+str).bootstrapSwitch("labelText", str+"("+rdata[keys[i]].length+")");
                     $("#"+str).on('switchChange.bootstrapSwitch', function(event, state){
                         selector[keys[i]] = state;
+                        if(state){
+                            count++;
+                        }else{
+                            count--;
+                        }
+                        if(count==0){button.disabled = true;}
+                        else{button.disabled = false;}
                         //console.log(selector);
                     });
 
