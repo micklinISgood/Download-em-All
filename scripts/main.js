@@ -13,14 +13,32 @@ document.addEventListener('DOMContentLoaded', function() {
     //var callback_data ;
     var folder;
     var rdata ; 
+    var selector = new Object(); 
+    var saveData = (function () {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        return function (data, fileName) {
+            var json = data,
+            blob = new Blob([json], {type: "octet/stream"}),
+            url = window.URL.createObjectURL(blob);
+            a.href = data;
+            a.download = fileName;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        };
+    }());
+
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {data: null}, function(response) {
                 rdata = response.data;
                 Object.keys(rdata).forEach(function(key) {
+                        selector[key] = true;
                         keys.push(key);
                 });
                 folder = tabs[0].url + "_";
                 if(keys.length !=0){button.disabled = false;} 
+
                 var tree = document.createDocumentFragment();
                 for(var i in keys){
                     var checkbox = document.createElement('input');
@@ -37,27 +55,36 @@ document.addEventListener('DOMContentLoaded', function() {
                     $("#"+str).bootstrapSwitch("onText", 'o');
                     $("#"+str).bootstrapSwitch("offText", 'x');
                     $("#"+str).bootstrapSwitch("labelText", str+"("+rdata[keys[i]].length+")");
+                    $("#"+str).on('switchChange.bootstrapSwitch', function(event, state){
+                        selector[keys[i]] = state;
+                        //console.log(selector);
+                    });
 
                 }
+                // chrome.fileSystem.getDisplayPath(Entry entry, function (displayPath) {
+                //     console.log(displayPath);
+                // });
+
+
+                button.addEventListener('click', function () {
+                    folder += new Date().toString();
+                    for(var i in keys){
+                        if(selector[keys[i]]){
+                            for(var j in rdata[keys[i]]){
+
+                                    saveData(rdata[keys[i]][j], folder+i+keys[i]);
+
+                            }
+                        }
+                    }
+       
+                });
+
             
             });
     });
 
    
-    button.addEventListener('click', function () {
-        folder += new Date().toString();
-        // $('#status').html('Clicked change links button');
-        // var text = $('#linkstext').val();
-        // if (!text) {
-        //     $('#status').html('Invalid text provided');
-        //     return;
-        // }
-        // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        //     chrome.tabs.sendMessage(tabs[0].id, {data: text}, function(response) {
-        //         $('#status').html(response);
-        //         //console.log('success');
-        //     });
-        // });
-    });
+   
 });
 
