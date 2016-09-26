@@ -18,11 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
         var a = document.createElement("a");
         document.body.appendChild(a);
         a.style = "display: none";
-        return function (data, fileName) {
+        return function (data) {
             var json = data,
             blob = new Blob([json], {type: "octet/stream"}),
             url = window.URL.createObjectURL(blob);
             a.href = data;
+            var slashIndex = data.lastIndexOf('/'); 
+            var ext = data.substring(slashIndex+1);
+            var qIndex = ext.lastIndexOf('?'); 
+            var fileName = ext.substring(0,qIndex);
             a.download = fileName;
             a.click();
             window.URL.revokeObjectURL(url);
@@ -72,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if(selector[keys[i]]){
                             for(var j in rdata[keys[i]]){
 
-                                    saveData(rdata[keys[i]][j], folder+i+keys[i]);
+                                    saveData(rdata[keys[i]][j]);
 
                             }
                         }
