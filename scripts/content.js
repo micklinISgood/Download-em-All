@@ -47,7 +47,6 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
 
     });
     List = document.querySelectorAll('img');
-    //console.log(linksList);
     [].forEach.call(List, function(anchors) {
 
 
