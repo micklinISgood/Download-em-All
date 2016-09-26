@@ -1,16 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    //document.getElementById('status').textContent = "Extension loaded";
-    
-    $('#switch-labelText').bootstrapSwitch();
-    $('#switch-labelText').bootstrapSwitch("state", true);
-    $('#switch-labelText').bootstrapSwitch("size", 'mini');
-    $('#switch-labelText').bootstrapSwitch("onText", 'o');
-    $('#switch-labelText').bootstrapSwitch("offText", 'x');
+
 
     var button = document.getElementById('download');
     button.disabled = true;
     var keys = [];
-    //var callback_data ;
     var folder;
     var rdata ; 
     var selector = new Object(); 

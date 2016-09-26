@@ -8,8 +8,7 @@
 
     <style>
       .container {
-        max-height: 400px;
-        min-height: 300px;
+        margin: 0 auto;
         width: 250px;
         border: 2px solid rgba(0,0,0,0.3);
         border-radius: 2px;
@@ -28,6 +27,7 @@
       }
       .page-header{
           height:20%;
+          color: #337ab7;
       }
       .patient-list {
         max-height: 1000px;
@@ -35,19 +35,22 @@
         overflow-x: hidden;
         max-width: 100%;
       }
+      footer{ 
+        margin-bottom: 3px; 
+      }
     </style>
     <div class="container">
         <div class="page-header">
-          <h4>Download'em All</h4>
+            <center><h4>Download'em All</h4>
         </div>
         <div id="form" class="form-group">
            
         </div>
         
-        <div>
-          <button class="btn btn-primary" id="download">Download</button>
-        </div>
+       
+         <footer><center> <button class="btn btn-primary" id="download">Download</button> <br/><br/> <a href="#report" id="report-bug" class="link2">Report bug</a> | <a href="#share" id="share" class="link2">Share</a> </center></footer>
     </div>
+   
     <script src="/scripts/jquery.min.js" type="text/javascript"></script>
     <!--   critical: load JQery before bootstrap-->
     <script src="/scripts/bootstrap.switch.js" type="text/javascript"></script>

@@ -70,8 +70,9 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
 
     });
 	
-    console.log(dict);
- 
-    sendResponse({data:dict, success: true});
+    //console.log(dict);
+    if(dict.length!=0){
+        sendResponse({data:dict, success: true});
+    }
 });
 
