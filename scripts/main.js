@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 rdata = response.data;
                 var count = 0;
                 Object.keys(rdata).forEach(function(key) {
-                        selector[key.substring(1)] = true;
+                        selector[key] = true;
                         keys.push(key);
                         count++;
                 });
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     $("#"+str).bootstrapSwitch("offText", 'x');
                     $("#"+str).bootstrapSwitch("labelText", str+"("+rdata[keys[i]].length+")");
                     (function (_str) {
-                       $("#"+_str).on('switchChange.bootstrapSwitch', function(event, state){
+                       $("#"+_str.substring(1)).on('switchChange.bootstrapSwitch', function(event, state){
                         selector[_str] = state;
                         if(state){
                             count++;
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         else{button.disabled = false;}
                         //console.log(selector);
                         });
-                    })(str);
+                    })(keys[i]);
                    
                 }
                 // chrome.fileSystem.getDisplayPath(Entry entry, function (displayPath) {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     //console.log(selector);
                     for(var i in keys){
           
-                        if(selector[keys[i].substring(1)]){
+                        if(selector[keys[i]]){
                             for(var j in rdata[keys[i]]){
 
                                     saveData(rdata[keys[i]][j]);
