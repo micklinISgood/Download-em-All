@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 rdata = response.data;
                 var count = 0;
                 Object.keys(rdata).forEach(function(key) {
-                        selector[key] = true;
+                        selector[key.substring(1)] = true;
                         keys.push(key);
                         count++;
                 });
@@ -59,8 +59,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     $("#"+str).bootstrapSwitch("onText", 'o');
                     $("#"+str).bootstrapSwitch("offText", 'x');
                     $("#"+str).bootstrapSwitch("labelText", str+"("+rdata[keys[i]].length+")");
-                    $("#"+str).on('switchChange.bootstrapSwitch', function(event, state){
-                        selector[keys[i]] = state;
+                    (function (_str) {
+                       $("#"+_str).on('switchChange.bootstrapSwitch', function(event, state){
+                        selector[_str] = state;
                         if(state){
                             count++;
                         }else{
@@ -69,8 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         if(count==0){button.disabled = true;}
                         else{button.disabled = false;}
                         //console.log(selector);
-                    });
-
+                        });
+                    })(str);
+                   
                 }
                 // chrome.fileSystem.getDisplayPath(Entry entry, function (displayPath) {
                 //     console.log(displayPath);
@@ -78,9 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
                 button.addEventListener('click', function () {
-                    folder += new Date().toString();
+                    //console.log(selector);
                     for(var i in keys){
-                        if(selector[keys[i]]){
+          
+                        if(selector[keys[i].substring(1)]){
                             for(var j in rdata[keys[i]]){
 
                                     saveData(rdata[keys[i]][j]);
